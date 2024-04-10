@@ -1,5 +1,7 @@
 # Predicting-Credit-Card-Fraud
 
+![Example Image](credit_card_fishing.png)
+
 ## Objectives
 
 This project aims to develop a machine learning model capable of identifying fraudulent transactions. Given the challenges posed by imbalanced datasets typical in fraud detection, we employ various data preprocessing techniques, including resampling and feature scaling, and explore different models to improve prediction accuracy and recall.
