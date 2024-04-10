@@ -53,8 +53,7 @@ X_resampled, y_resampled = smote_enn.fit_resample(X, y)
 # Scaling the data
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X_resampled)
-
-## Model Development
+```
 
 ## Model Development
 
