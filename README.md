@@ -99,9 +99,7 @@ A thorough and methodical evaluation process is crucial in assessing the effecti
 
 ### Evaluation Methodology
 
-1. **Cross-Validation**: To mitigate the risk of overfitting and ensure that our model's performance is generalizable across different subsets of the data, we utilized k-fold cross-validation. Specifically, we partitioned the data into k subsets, training the model on k-1 subsets and validating it on the remaining subset. This process was repeated k times, with each subset serving as the validation set once, providing a robust estimate of the model's performance.
-
-2. **Performance Metrics**: Understanding the nuances of model performance in the context of fraud detection required us to look beyond mere accuracy. We employed several key metrics to gain a comprehensive view of each model's effectiveness:
+**Performance Metrics**: Understanding the nuances of model performance in the context of fraud detection required us to look beyond mere accuracy. We employed several key metrics to gain a comprehensive view of each model's effectiveness:
    - **Accuracy**: The proportion of total predictions that were correct.
    - **Precision (Positive Predictive Value)**: Of all transactions predicted as fraudulent, the percentage that were correctly identified.
    - **Recall (Sensitivity)**: Of all actual fraudulent transactions, the percentage that were correctly identified by the model.
