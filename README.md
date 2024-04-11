@@ -127,11 +127,13 @@ To further optimize our model's performance, specifically the Random Forest clas
 ### Conclusions and Discussion
 
 - 1. Challenges with Logistic Regression in Imbalanced Classification
+
 The Logistic Regression model showed excellent performance in predicting non-fraudulent transactions with near-perfect precision, recall, and F1-score for the majority class (non-fraud). However, it struggled significantly with the minority class (fraud), as evidenced by the low precision yet high recall for fraud predictions. This highlights a common challenge in imbalanced datasets where models tend to perform well on the majority class but poorly on the minority class, which is often the class of interest.
 
 Conclusion: While Logistic Regression could effectively identify non-fraudulent transactions, its performance on detecting fraudulent transactions was inadequate, emphasizing the need for more sophisticated models or techniques to address class imbalance effectively.
 
 - 2. Exemplary Performance of the Tuned Random Forest Model
+
 By employing a Random Forest model and optimizing its parameters through Grid Search, we constructed a highly accurate model for both training and unseen data. The model achieved perfect scores in precision, recall, and F1-score across both classes on the training set, and it maintained high performance on the test set. Although the model's perfect training accuracy might initially suggest overfitting, the strong performance on the test data indicates that the model generalizes well to new data.
 
 Conclusion: The Random Forest model, when carefully tuned, provided an exceptional solution to the credit card fraud detection problem, outperforming Logistic Regression significantly in handling the imbalanced dataset, particularly in identifying fraudulent transactions with high accuracy.
