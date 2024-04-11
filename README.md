@@ -36,26 +36,34 @@ In addition to our initial data cleaning and preprocessing steps, we employed Pr
 
 This step was crucial in our preprocessing pipeline, allowing us to build more robust models that are better suited to predicting fraudulent transactions while efficiently managing computational resources.
 
-### Resampling with SMOTEENN
+### Resampling with SMOTE
 
 Given the inherent class imbalance typical in fraud detection scenarios, we employed SMOTEENN (a combination of Synthetic Minority Over-sampling Technique and Edited Nearest Neighbors) for resampling our dataset. This approach not only addresses the imbalance by oversampling the minority class and undersampling the majority class but also cleans the synthetic samples to remove any that are likely to be misclassified. This step was crucial in creating a more balanced dataset that allows our models to better learn and generalize from both classes.
 
 ### Feature Scaling
 
-Post-resampling, it was essential to standardize the feature scales to ensure that our machine learning models could interpret and learn from the data effectively. We utilized `StandardScaler` from scikit-learn, which standardizes features by removing the mean and scaling to unit variance. This preprocessing step is particularly important for models that are sensitive to the magnitude of input features, such as Logistic Regression and Support Vector Machines, ensuring that all features contribute equally to the model's prediction.
+Post-resampling, it was essential to standardize the feature scales to ensure that our machine learning models could interpret and learn from the data effectively. We utilized `StandardScaler` from scikit-learn, which standardizes features by removing the mean and scaling to unit variance. This preprocessing step is particularly important for models that are sensitive to the magnitude of input features, such as Logistic Regression, ensuring that all features contribute equally to the model's prediction.
+
+### StratifiedKFold Cross-Validation
+To ensure our model's performance was robust and not just memorizing the training data, we used StratifiedKFold. This technique maintains class proportion across folds, critical for imbalanced datasets like ours, providing a more accurate performance assessment.
+
+### Pipeline Implementation
+The pipeline streamlined the process, applying SMOTE for class imbalance and StandardScaler for scaling before training the Random Forest model. This not only automated the workflow but also prevented data leakage by ensuring transformations were fit only on the training data within each fold.
 
 ```python
 from sklearn.preprocessing import StandardScaler
-from imblearn.combine import SMOTEENN
+from imblearn.combine import SMOTE
+from sklearn.linear_model import LogisticRegression
+from imblearn.pipeline import Pipeline as ImbPipeline
 
-# Resampling with SMOTEENN
-smote_enn = SMOTEENN(random_state=42)
-X_resampled, y_resampled = smote_enn.fit_resample(X, y)
-
-# Scaling the data
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X_resampled)
+# Call and define that includes scaling, SMOTE, and RF
+pipeline = ImbPipeline([
+    ('scaler', StandardScaler()),
+    ('smote', SMOTE(random_state=42)),
+    ('classifier', RandomForestClassifier(random_state=42))
+])
 ```
+![Example Image](pipeline.png)
 
 ## Model Development
 
@@ -68,7 +76,7 @@ Initially, we applied **Logistic Regression**, a widely used linear model for bi
 #### Libraries Used:
 - scikit-learn for model training (`LogisticRegression` class) and evaluation metrics.
 
-### Logistic Regression with PCA
+### Logistic Regression
 
 To investigate the impact of dimensionality reduction on model performance, we subsequently applied **PCA (Principal Component Analysis)** to our dataset before training the Logistic Regression model. This approach aimed to reduce the complexity of the data, potentially enhancing model training efficiency and effectiveness by focusing on the most informative aspects of the data.
 
@@ -89,15 +97,7 @@ To further optimize our model's performance, specifically the Random Forest clas
 #### Libraries Used:
 - scikit-learn for Grid Search CV (`GridSearchCV` class) and model evaluation.
 
-### Evaluation Framework
-
-Each model was rigorously evaluated using a consistent set of metrics, including accuracy, precision, recall, and F1-score, allowing us to compare their performance directly. This systematic approach to model development and evaluation ensured that our findings were reliable and actionable.
-
-By experimenting with different models and applying both preprocessing techniques like PCA and advanced methods like hyperparameter tuning, we aimed to comprehensively explore the solution space for fraud detection. The utilization of scikit-learn throughout provided a robust and flexible framework for model training, evaluation, and optimization.
-
 ## Model Evaluation
-
-A thorough and methodical evaluation process is crucial in assessing the effectiveness of machine learning models, especially in applications as critical as fraud detection. Our evaluation strategy employed a combination of cross-validation techniques and a comprehensive set of performance metrics to ensure the reliability and robustness of our models.
 
 ### Evaluation Methodology
 
@@ -110,32 +110,35 @@ A thorough and methodical evaluation process is crucial in assessing the effecti
 
 ### Model Performance
 
-- **Logistic Regression without PCA**: Served as our baseline model. While offering decent accuracy, it struggled with recall, indicating a potential issue with identifying the minority class (fraudulent transactions).
-  
-- **Logistic Regression with PCA**: Application of PCA slightly improved model efficiency by reducing features, but the impact on overall recall and precision was minimal, suggesting that dimensionality reduction did not significantly enhance our ability to detect fraud within this model framework.
+- **Logistic Regression : Served as our baseline model. While offering decent accuracy, it struggled with recall, indicating a potential issue with identifying the minority class (fraudulent transactions).
 
-- **Random Forest Model**: Showed a substantial improvement in recall and precision compared to the Logistic Regression models. The inherent ability of Random Forest to manage imbalances and capture complex patterns made it more adept at identifying fraudulent transactions.
+![Example Image](reportlr.png)
 
 - **Random Forest with Tuned Hyperparameters**: The application of GridSearchCV to fine-tune the Random Forest model's hyperparameters further improved performance. This model demonstrated the highest F1 score, recall, and precision, underlining the value of hyperparameter tuning in optimizing model outcomes.
 
-### Discussion
+![Example Image](reportrf.png)
 
-The evaluation process underscored the importance of considering a range of metrics to truly understand model performance, especially in imbalanced datasets like those common in fraud detection. While accuracy remained high across all models, the nuanced improvements in recall, precision, and F1 scores were pivotal in selecting the best model for our needs.
+### Random Forest Model on Test Data
 
-The superiority of the tuned Random Forest model highlights the critical role of hyperparameter optimization in machine learning workflows, particularly for complex, imbalanced datasets. Future efforts will focus on exploring additional ensemble methods and advanced anomaly detection algorithms to further enhance our ability to accurately identify fraudulent activities.
+- The ultimate test of a model's utility is its performance on new, unseen data. The tuned Random Forest model not only showed promising results during training but also demonstrated excellent generalization capabilities on an independent test dataset. With high precision and recall for detecting fraudulent transactions in the test data, the model confirmed its practical applicability and effectiveness in a real-world scenario.
 
+![Example Image](reporttest.png)
 
-## Comparison of All Models
+### Conclusions and Discussion
 
-- Provide a comparison of all the models tested.
-- Include metrics like accuracy, precision, recall, F1-score, etc., to support the comparison.
+- 1. Challenges with Logistic Regression in Imbalanced Classification
+The Logistic Regression model showed excellent performance in predicting non-fraudulent transactions with near-perfect precision, recall, and F1-score for the majority class (non-fraud). However, it struggled significantly with the minority class (fraud), as evidenced by the low precision yet high recall for fraud predictions. This highlights a common challenge in imbalanced datasets where models tend to perform well on the majority class but poorly on the minority class, which is often the class of interest.
 
-## Best Model Parameters
+Conclusion: While Logistic Regression could effectively identify non-fraudulent transactions, its performance on detecting fraudulent transactions was inadequate, emphasizing the need for more sophisticated models or techniques to address class imbalance effectively.
 
-```plaintext
-Best model: [Model Name]
-Parameters:
-- n_estimators: 200
-- max_depth: None
-- min_samples_split: 5
-- min_samples_leaf: 1
+- 2. Exemplary Performance of the Tuned Random Forest Model
+By employing a Random Forest model and optimizing its parameters through Grid Search, we constructed a highly accurate model for both training and unseen data. The model achieved perfect scores in precision, recall, and F1-score across both classes on the training set, and it maintained high performance on the test set. Although the model's perfect training accuracy might initially suggest overfitting, the strong performance on the test data indicates that the model generalizes well to new data.
+
+Conclusion: The Random Forest model, when carefully tuned, provided an exceptional solution to the credit card fraud detection problem, outperforming Logistic Regression significantly in handling the imbalanced dataset, particularly in identifying fraudulent transactions with high accuracy.
+
+- 3. Generalization and Effectiveness on New Test Data
+
+The ultimate test of a model's utility is its performance on new, unseen data. The tuned Random Forest model not only showed promising results during training but also demonstrated excellent generalization capabilities on an independent test dataset. With high precision and recall for detecting fraudulent transactions in the test data, the model confirmed its practical applicability and effectiveness in a real-world scenario.
+
+Conclusion: The tuned Random Forest model's robust performance on both training and new test data underscores its effectiveness in detecting fraudulent transactions within credit card data. It showcases the potential of machine learning models, properly optimized and evaluated, to provide valuable tools in combating financial fraud.
+These conclusions encapsulate the journey from identifying the limitations of a simpler model in handling imbalanced data, through the process of selecting and tuning a more complex model, to validating this model's effectiveness on unseen data, thereby illustrating the project's success in developing a reliable solution for credit card fraud detection.
