@@ -110,7 +110,7 @@ To further optimize our model's performance, specifically the Random Forest clas
 
 ### Model Performance
 
-- **Logistic Regression : Served as our baseline model. While offering decent accuracy, it struggled with recall, indicating a potential issue with identifying the minority class (fraudulent transactions).
+- **Logistic Regression** : Served as our baseline model. While offering decent accuracy, it struggled with recall, indicating a potential issue with identifying the minority class (fraudulent transactions).
 
 ![Example Image](reportlr.png)
 
