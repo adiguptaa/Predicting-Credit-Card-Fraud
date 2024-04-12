@@ -112,7 +112,7 @@ To further optimize our model's performance, specifically the Random Forest clas
 
 - **Logistic Regression** : Served as our baseline model. While offering decent accuracy, it struggled with recall, indicating a potential issue with identifying the minority class (fraudulent transactions).
 
-![Example Image](reportlr.png)
+![Example Image](images/reportlr.png)
 
 - **Random Forest with Tuned Hyperparameters**: The application of GridSearchCV to fine-tune the Random Forest model's hyperparameters further improved performance. This model demonstrated the highest F1 score, recall, and precision, underlining the value of hyperparameter tuning in optimizing model outcomes.
 
