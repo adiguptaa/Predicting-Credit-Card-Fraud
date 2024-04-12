@@ -135,14 +135,22 @@ Conclusion: The Random Forest model, when carefully tuned, provided an exception
 
 - 3. Generalization and Effectiveness on New Test Data
 
+The ultimate test of a model's utility is its performance on new, unseen data. The tuned Random Forest model not only showed promising results during training but also demonstrated excellent generalization capabilities on an independent test dataset. With high precision and recall for detecting fraudulent transactions in the test data, the model confirmed its practical applicability and effectiveness in a real-world scenario.
+
+Conclusion: The tuned Random Forest model's robust performance on both training and new test data underscores its effectiveness in detecting fraudulent transactions within credit card data. It showcases the potential of machine learning models, properly optimized and evaluated, to provide valuable tools in combating financial fraud.
+
+
 ### Group Members
 - Aditya Gupta
 - Alexander Iluridze
 - Gabriel Morano
 - Lulu Ma
-The ultimate test of a model's utility is its performance on new, unseen data. The tuned Random Forest model not only showed promising results during training but also demonstrated excellent generalization capabilities on an independent test dataset. With high precision and recall for detecting fraudulent transactions in the test data, the model confirmed its practical applicability and effectiveness in a real-world scenario.
 
-Conclusion: The tuned Random Forest model's robust performance on both training and new test data underscores its effectiveness in detecting fraudulent transactions within credit card data. It showcases the potential of machine learning models, properly optimized and evaluated, to provide valuable tools in combating financial fraud.
+### Acknowledgements
+We would like to express our deepest appreciation to the following individuals for their invaluable assistance and support throughout this project:
 
+- Pablo Jordan
+- Shahriar Shochi
+- Wilson Qin
 
 
