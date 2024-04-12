@@ -6,6 +6,24 @@
 
 This project aims to develop a machine learning model capable of identifying fraudulent transactions. Given the challenges posed by imbalanced datasets typical in fraud detection, we employ various data preprocessing techniques, including resampling and feature scaling, and explore different models to improve prediction accuracy and recall.
 
+## Notebook Reading Order
+To understand the flow of the project, please review the notebooks in the following order:
+
+1. **Data Preparation**: `1data_prep.ipynb`  
+   - **Description**: This notebook cleans and prepares the training dataset for use in machine learning models.
+
+2. **Logistic Regression Model**: `2LogisticReg.ipynb`  
+   - **Description**: This notebook trains and tests a logistic regression model.
+
+2. **Test Data Preparation**: `3a_test_data_prep.ipynb`  
+   - **Description**: This notebook cleans and preps the testing dataset for use in ML models.
+
+4. **Random Forest Model**: `3RandomForest_traintest.ipynb`  
+   - **Description**: This notebook trains and tests a random forest model on training data and testing data.
+
+5. **Fraud Analysis**: `4fraud_analysis.ipynb`  
+   - **Description**: This notebook analyzes the original testing data to help quantify our model's performance.
+
 ## Preprocessing Steps
 
 ### Data Cleaning
@@ -140,13 +158,13 @@ The ultimate test of a model's utility is its performance on new, unseen data. T
 Conclusion: The tuned Random Forest model's robust performance on both training and new test data underscores its effectiveness in detecting fraudulent transactions within credit card data. It showcases the potential of machine learning models, properly optimized and evaluated, to provide valuable tools in combating financial fraud.
 
 
-### Group Members
+## Group Members
 - Aditya Gupta
 - Alexander Iluridze
 - Gabriel Morano
 - Lulu Ma
 
-### Acknowledgements
+## Acknowledgements
 We would like to express our deepest appreciation to the following individuals for their invaluable assistance and support throughout this project:
 
 - Pablo Jordan
