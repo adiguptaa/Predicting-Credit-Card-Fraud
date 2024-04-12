@@ -30,15 +30,11 @@ In addition to our initial data cleaning and preprocessing steps, we employed Pr
 
 - **Dimensionality Reduction**: PCA was applied to reduce the high dimensionality of our dataset, transforming the original features into a smaller set of principal components that capture the most significant variance and patterns in the data.
 
-- **Improving Model Efficiency and Performance**: By focusing on principal components, we were able to streamline our models, making them faster and often more accurate, as they could now learn from the most informative aspects of the data without being distracted by noise or irrelevant features.
-
-- **Visualization**: PCA also facilitated a better understanding and visualization of the data distribution, enabling us to observe clustering patterns among the transformed features that were not apparent in the original high-dimensional space.
-
 This step was crucial in our preprocessing pipeline, allowing us to build more robust models that are better suited to predicting fraudulent transactions while efficiently managing computational resources.
 
 ### Resampling with SMOTE
 
-Given the inherent class imbalance typical in fraud detection scenarios, we employed SMOTEENN (a combination of Synthetic Minority Over-sampling Technique and Edited Nearest Neighbors) for resampling our dataset. This approach not only addresses the imbalance by oversampling the minority class and undersampling the majority class but also cleans the synthetic samples to remove any that are likely to be misclassified. This step was crucial in creating a more balanced dataset that allows our models to better learn and generalize from both classes.
+Given the inherent class imbalance typical in fraud detection scenarios, we employed SMOTE for resampling our dataset. This approach not only addresses the imbalance by oversampling the minority class and undersampling the majority class but also cleans the synthetic samples to remove any that are likely to be misclassified. This step was crucial in creating a more balanced dataset that allows our models to better learn and generalize from both classes.
 
 ### Feature Scaling
 
@@ -106,7 +102,6 @@ To further optimize our model's performance, specifically the Random Forest clas
    - **Precision (Positive Predictive Value)**: Of all transactions predicted as fraudulent, the percentage that were correctly identified.
    - **Recall (Sensitivity)**: Of all actual fraudulent transactions, the percentage that were correctly identified by the model.
    - **F1 Score**: A harmonic mean of precision and recall, providing a single metric to assess the balance between them.
-   - **ROC-AUC**: The Area Under the Receiver Operating Characteristic Curve, measuring the model's ability to distinguish between classes.
 
 ### Model Performance
 
@@ -136,11 +131,18 @@ Conclusion: While Logistic Regression could effectively identify non-fraudulent 
 
 By employing a Random Forest model and optimizing its parameters through Grid Search, we constructed a highly accurate model for both training and unseen data. The model achieved perfect scores in precision, recall, and F1-score across both classes on the training set, and it maintained high performance on the test set. Although the model's perfect training accuracy might initially suggest overfitting, the strong performance on the test data indicates that the model generalizes well to new data.
 
-Conclusion: The Random Forest model, when carefully tuned, provided an exceptional solution to the credit card fraud detection problem, outperforming Logistic Regression significantly in handling the imbalanced dataset, particularly in identifying fraudulent transactions with high accuracy.
+Conclusion: The Random Forest model, when carefully tuned, provided an exceptional solution to the credit card fraud detection problem, outperforming Random Forest Model significantly in handling the imbalanced dataset, particularly in identifying fraudulent transactions with high accuracy.
 
 - 3. Generalization and Effectiveness on New Test Data
 
+### Group Members
+- Aditya Gupta
+- Alexander Iluridze
+- Gabriel Morano
+- Lulu Ma
 The ultimate test of a model's utility is its performance on new, unseen data. The tuned Random Forest model not only showed promising results during training but also demonstrated excellent generalization capabilities on an independent test dataset. With high precision and recall for detecting fraudulent transactions in the test data, the model confirmed its practical applicability and effectiveness in a real-world scenario.
 
 Conclusion: The tuned Random Forest model's robust performance on both training and new test data underscores its effectiveness in detecting fraudulent transactions within credit card data. It showcases the potential of machine learning models, properly optimized and evaluated, to provide valuable tools in combating financial fraud.
-These conclusions encapsulate the journey from identifying the limitations of a simpler model in handling imbalanced data, through the process of selecting and tuning a more complex model, to validating this model's effectiveness on unseen data, thereby illustrating the project's success in developing a reliable solution for credit card fraud detection.
+
+
+
